@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
 import { Mail, Phone, MapPin, Clock, Check, Loader2 } from "lucide-react";
@@ -32,19 +31,17 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-const formSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  company: z.string().optional(),
-  email: z.string().email("Enter a valid email"),
-  phone: z.string().optional(),
-  country: z.string().optional(),
-  productCategory: z.string().optional(),
-  quantity: z.string().optional(),
-  targetDate: z.string().optional(),
-  message: z.string().optional(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+type FormValues = {
+  name: string;
+  company?: string;
+  email: string;
+  phone?: string;
+  country?: string;
+  productCategory?: string;
+  quantity?: string;
+  targetDate?: string;
+  message?: string;
+};
 
 function Contact() {
   const { category } = Route.useSearch();
@@ -56,7 +53,6 @@ function Contact() {
     reset,
     formState: { errors },
   } = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
     defaultValues: { productCategory: category ?? "" },
   });
 
@@ -123,13 +119,23 @@ function Contact() {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                     <Field label="Full name" error={errors.name?.message}>
-                      <input {...register("name")} className={inputClass} />
+                      <input
+                        {...register("name", { required: "Name is required" })}
+                        className={inputClass}
+                      />
                     </Field>
                     <Field label="Company">
                       <input {...register("company")} className={inputClass} />
                     </Field>
                     <Field label="Email" error={errors.email?.message}>
-                      <input type="email" {...register("email")} className={inputClass} />
+                      <input
+                        type="email"
+                        {...register("email", {
+                          required: "Email is required",
+                          pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Enter a valid email" },
+                        })}
+                        className={inputClass}
+                      />
                     </Field>
                     <Field label="Phone">
                       <input {...register("phone")} className={inputClass} />
