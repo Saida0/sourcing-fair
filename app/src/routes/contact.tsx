@@ -116,7 +116,13 @@ function Contact() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <form
+                  onSubmit={handleSubmit(onSubmit, (errs) => {
+                    // eslint-disable-next-line no-console
+                    console.log("RHF_VALIDATION_ERRORS", JSON.stringify(errs));
+                  })}
+                  className="space-y-5"
+                >
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                     <Field label="Full name" error={errors.name?.message}>
                       <input
