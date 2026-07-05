@@ -20,7 +20,9 @@ export function Hero() {
 
   useEffect(() => {
     if (reduced || !headlineRef.current) return;
-    const split = new SplitType(headlineRef.current, { types: "chars" });
+    // "words, chars" (not just "chars") keeps each word glued into its own
+    // wrapper so the browser only wraps between whole words, never mid-word.
+    const split = new SplitType(headlineRef.current, { types: "words,chars" });
     gsap.fromTo(
       split.chars,
       { yPercent: 120, rotate: 6, opacity: 0 },
