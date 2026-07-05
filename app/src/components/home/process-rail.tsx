@@ -33,6 +33,11 @@ export function ProcessRail() {
           start: "top top",
           end: () => `+=${distance + window.innerHeight * 0.5}`,
           pin: true,
+          // false: no spacer is inserted (the documented pin-spacer trap —
+          // a spacer here would read as a large blank band in a full-page
+          // screenshot). The next section (solid background) slides up and
+          // over the pinned rail instead, which is the intended reveal.
+          pinSpacing: false,
           scrub: 0.6,
           animation: gsap.to(track, { x: -distance, ease: "none" }),
         });
