@@ -46,7 +46,7 @@ export function Hero() {
       </div>
 
       <div className="mx-auto grid w-full max-w-[1240px] grid-cols-1 items-center gap-16 px-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
+        <div className="min-w-0">
           <span className="font-spec text-xs uppercase tracking-[0.18em] text-sf-brass">
             RMG Trims &amp; Accessories &middot; Uttara, Dhaka
           </span>

@@ -134,7 +134,7 @@ function NewsletterForm() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@company.com"
         aria-label="Email address"
-        className="h-10 w-full rounded-full border border-white/20 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-sf-brass focus:outline-none"
+        className="h-10 w-full min-w-0 rounded-full border border-white/20 bg-white/5 px-4 text-sm text-white placeholder:text-white/40 focus:border-sf-brass focus:outline-none"
       />
       <button
         type="submit"

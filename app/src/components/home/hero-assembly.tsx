@@ -55,7 +55,7 @@ export function HeroAssembly() {
   return (
     <div
       ref={rootRef}
-      className="relative mx-auto grid aspect-square w-full max-w-[420px] grid-cols-2 gap-6 rounded-[24px] border border-sf-line bg-white p-10 shadow-[0_30px_60px_-30px_rgba(16,20,35,0.18)]"
+      className="relative mx-auto grid aspect-square w-full min-w-0 max-w-[420px] grid-cols-2 gap-6 rounded-[24px] border border-sf-line bg-white p-10 shadow-[0_30px_60px_-30px_rgba(16,20,35,0.18)]"
     >
       <div className="absolute inset-6 rounded-[16px] border border-dashed border-sf-navy/15" aria-hidden />
       <Piece>
