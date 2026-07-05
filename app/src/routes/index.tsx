@@ -1,28 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { Nav } from "../components/nav";
+import { Footer } from "../components/footer";
+import { WhatsappButton } from "../components/whatsapp-button";
+import { Hero } from "../components/home/hero";
+import { StatsBand } from "../components/home/stats-band";
+import { AboutSummary } from "../components/home/about-summary";
+import { WhyUs } from "../components/home/why-us";
+import { ProductsGrid } from "../components/home/products-grid";
+import { ProcessRail } from "../components/home/process-rail";
+import { Presence } from "../components/home/presence";
+import { Quality } from "../components/home/quality";
+import { CtaBanner } from "../components/home/cta-banner";
+import { Faq } from "../components/home/faq";
+
 export const Route = createFileRoute("/")({
-  // No title/description here on purpose: the home page inherits the app's
-  // editable page metadata from the root route (set via the marketplace meta
-  // API — title/favicon/og), so a shared link to "/" shows the owner's values.
-  // Add a `head` here only to give a SPECIFIC page its own title/description
-  // (a deeper route's head overrides the root's for that page).
   component: Index,
 });
 
-// Replace this placeholder. Routes are server-rendered — keep render SSR-safe
-// (no window/document at module top level or during render). See ./README.md.
 function Index() {
   return (
-    <div
-      data-higgsfield-blank-page-placeholder="REMOVE_THIS"
-      className="flex min-h-screen flex-col items-center justify-center gap-3 px-6 text-center"
-    >
-      <h1 className="text-2xl font-semibold tracking-tight">
-        Your website will live here.
-      </h1>
-      <p className="text-base text-gray-500">
-        Ask Higgsfield Supercomputer to build it.
-      </p>
+    <div className="min-h-dvh bg-white">
+      <Nav />
+      <main>
+        <Hero />
+        <StatsBand />
+        <AboutSummary />
+        <WhyUs />
+        <ProductsGrid />
+        <ProcessRail />
+        <Presence />
+        <Quality />
+        <CtaBanner />
+        <Faq />
+      </main>
+      <Footer />
+      <WhatsappButton />
     </div>
   );
 }

@@ -88,21 +88,54 @@
   --radius: 0.625rem;
 }
 
+/*
+ * Sourcing Fair brand token layer. This is a `type: "website"` build — the
+ * page never uses q-prefixed Quanta utilities or hf-color variables above;
+ * these are the site's own tokens (design-brief.md "Locked palette"/"Locked
+ * type"). Navy is the client's existing real brand color (sourcingfairbd.com).
+ */
+@theme {
+  --color-sf-navy: #1e4686;
+  --color-sf-navy-deep: #12305f;
+  --color-sf-ink: #101423;
+  --color-sf-brass: #b98a2e;
+  --color-sf-brass-light: #d9ad55;
+  --color-sf-paper: #f6f7fb;
+  --color-sf-line: #dde2ee;
+  --font-display: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-spec: "IBM Plex Mono", ui-monospace, monospace;
+}
+
 @layer base {
   html {
-    background-color: var(--hf-color-background-primary);
-    color: var(--hf-color-text-primary);
-    color-scheme: dark;
+    background-color: #ffffff;
+    color: var(--color-sf-ink);
+    color-scheme: light;
   }
 
   body {
     min-height: 100vh;
-    background-color: var(--hf-color-background-primary);
-    color: var(--hf-color-text-primary);
-    font-family: var(--hf-type-family-secondary);
+    background-color: #ffffff;
+    color: var(--color-sf-ink);
+    font-family: var(--font-body);
   }
 
   * {
-    border-color: var(--hf-color-border-default);
+    border-color: var(--color-sf-line);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-spec {
+    font-family: var(--font-mono-spec);
   }
 }
