@@ -2,6 +2,31 @@
 // and handwritten product-category notes. Nothing here is invented marketing
 // social-proof — stats, addresses, and category lists are the client's own.
 
+// Product photography: ALL category images below are AI-generated studio
+// shots (client request, 2026-07-06) — the previous versions were tiny
+// low-resolution crops from the client's company profile PDF (~550×130px)
+// that looked blurry in the 16:10 card slots. Each image depicts the generic
+// product type only (no brand marks, no readable text). If the client later
+// supplies real high-res factory photography, swap these files in place.
+import labelsPhoto from "../assets/products/labels.jpg";
+import elasticPhoto from "../assets/products/elastic.jpg";
+import drawstringPhoto from "../assets/products/drawstring.jpg";
+import twillTapePhoto from "../assets/products/twill-tape.jpg";
+import tagsPhoto from "../assets/products/tags.jpg";
+import buttonsPhoto from "../assets/products/buttons.jpg";
+import leatherItemsPhoto from "../assets/products/leather-items.jpg";
+import lacePhoto from "../assets/products/lace.jpg";
+import beltBucklePhoto from "../assets/products/belt-buckle.jpg";
+import zippersPhoto from "../assets/products/zippers.jpg";
+import polyPhoto from "../assets/products/poly.jpg";
+import cartonPhoto from "../assets/products/carton.jpg";
+import tradeLicenseScan from "../assets/certificates/trade-license.jpg";
+import etinScan from "../assets/certificates/etin.jpg";
+import binScan from "../assets/certificates/bin.jpg";
+import ercScan from "../assets/certificates/erc.jpg";
+import ircScan from "../assets/certificates/irc.jpg";
+import oekoTexScan from "../assets/certificates/oeko-tex.jpg";
+
 export const company = {
   name: "Sourcing Fair",
   legalNote: "RMG Trims & Accessories Manufacturer and Supplier",
@@ -11,6 +36,7 @@ export const company = {
   mapQuery: "House 19, Road 3/C, Sector 9, Uttara, Dhaka 1230, Bangladesh",
   whatsapp: "8801831333599",
   hours: "Saturday to Thursday, 9:00 AM to 6:00 PM (GMT+6)",
+  chinaOffice: "Jinhai Creative Center B4-402B, Le Cong Town, Shunde District, Foshan City, Guangdong Province, China",
 };
 
 export const stats = [
@@ -22,12 +48,109 @@ export const stats = [
 
 export const presenceCountries = [
   { name: "Bangladesh", role: "Head office, Uttara, Dhaka" },
-  { name: "China", role: "Sourcing & supplier network" },
+  { name: "China", role: "Foshan, Guangdong — sourcing & supplier network" },
   { name: "Hong Kong", role: "Sourcing & supplier network" },
   { name: "Sri Lanka", role: "Sourcing & supplier network" },
   { name: "India", role: "Sourcing & supplier network" },
   { name: "Indonesia", role: "Sourcing & supplier network" },
 ];
+
+// Leadership messages condensed from the client's own company profile PDF
+// (Sourcing_Fair_Company_Profile_Update.pdf) — not invented bios.
+export const leadership = [
+  {
+    name: "Md. Rakibul Islam Ripon",
+    title: "Managing Partner",
+    credential: "MSc · 20+ years in RMG trims & accessories",
+    quote:
+      "Our goal is to become a trusted global sourcing partner by delivering excellence in every aspect of our service — from product development to final shipment. We believe in integrity, commitment, and long-term business relationships.",
+  },
+  {
+    name: "S.M. Al Mamun Himel",
+    title: "Managing Partner",
+    credential: "18+ years in RMG trims & accessories",
+    quote:
+      "Our mission is to strengthen long-term business relationships with global partners by maintaining trust, transparency, and high service standards, while continuously improving our sourcing network and operational efficiency.",
+  },
+];
+
+// Buyer names as given in the client's company profile PDF. Rendered as a
+// plain typographic wordmark strip, not logo artwork — we do not hold
+// image rights to reproduce these brands' marks.
+export const buyers = [
+  "CELO",
+  "Lee",
+  "GAP",
+  "JCPenney",
+  "TFG London",
+  "Modextil",
+  "AKK Fashion",
+  "Rockmans",
+  "United States Polo Association",
+  "Weatherproof",
+  "Wearhouse",
+  "Giant Tiger",
+  "Rimar",
+  "RB Sellars",
+  "P&C",
+  "NEXT",
+];
+
+// The company's own registrations (Trade License, eTIN, BIN, ERC, IRC) as
+// listed in its company profile. Certificate numbers and scanned copies are
+// shared with buyers directly during vendor qualification, not published
+// here — the scans carry personal photos/signatures/ID numbers.
+export const businessRegistrations = [
+  "Trade License — Gazipur City Corporation",
+  "eTIN — National Board of Revenue",
+  "BIN / VAT Registration Certificate",
+  "Export Registration Certificate (ERC)",
+  "Import Registration Certificate (IRC)",
+];
+
+// Scanned certificate/registration documents, cropped from the client's own
+// company profile PDF (client request, 2026-07-08: publish them in a sliding
+// strip like competitor sites). Note: some scans carry the owners' photos and
+// signatures — the client chose to publish them, as they already do in the
+// PDF they distribute to buyers.
+export const certificates: { name: string; issuer: string; image: string }[] = [
+  {
+    name: "Trade License",
+    issuer: "Gazipur City Corporation",
+    image: tradeLicenseScan,
+  },
+  {
+    name: "eTIN Certificate",
+    issuer: "National Board of Revenue",
+    image: etinScan,
+  },
+  {
+    name: "BIN / VAT Registration",
+    issuer: "National Board of Revenue",
+    image: binScan,
+  },
+  {
+    name: "Export Registration (ERC)",
+    issuer: "Office of the CCI&E",
+    image: ercScan,
+  },
+  {
+    name: "Import Registration (IRC)",
+    issuer: "Office of the CCI&E",
+    image: ircScan,
+  },
+  {
+    name: "OEKO-TEX® Standard 100",
+    issuer: "Partner factory — Angel Button Ltd.",
+    image: oekoTexScan,
+  },
+];
+
+export const factoryCertification = {
+  factory: "Angel Button Limited",
+  standard: "OEKO-TEX® Standard 100",
+  scope: "Buttons made of 100% polyester — horn, chalk & pearl finishes",
+};
 
 export const values = [
   {
@@ -118,6 +241,7 @@ export type ProductCategory = {
   icon: string;
   description: string;
   subcategories: string[];
+  image?: string;
 };
 
 export const productCategories: ProductCategory[] = [
@@ -125,6 +249,7 @@ export const productCategories: ProductCategory[] = [
     slug: "buttons",
     name: "Buttons",
     icon: "button",
+    image: buttonsPhoto,
     description:
       "High-quality garment buttons, durable, stylish, and customizable for all apparel needs with consistent quality and timely supply.",
     subcategories: [
@@ -143,6 +268,7 @@ export const productCategories: ProductCategory[] = [
     slug: "labels",
     name: "Labels",
     icon: "label",
+    image: labelsPhoto,
     description:
       "Premium woven and printed labels ensuring durability and style, with custom designs in high-quality materials.",
     subcategories: [
@@ -157,6 +283,7 @@ export const productCategories: ProductCategory[] = [
     slug: "elastic",
     name: "Elastic",
     icon: "elastic",
+    image: elasticPhoto,
     description:
       "Woven and knit elastics engineered for consistent stretch recovery across waistbands, cuffs, and activewear.",
     subcategories: ["Jacquard elastic", "Woven elastic", "Plain elastic", "Hole elastic"],
@@ -165,6 +292,7 @@ export const productCategories: ProductCategory[] = [
     slug: "zippers",
     name: "Zippers",
     icon: "zipper",
+    image: zippersPhoto,
     description:
       "All types of garment zippers with durable quality and export-standard finishing.",
     subcategories: ["Metal zipper", "Nylon zipper", "Vislon zipper"],
@@ -173,6 +301,7 @@ export const productCategories: ProductCategory[] = [
     slug: "twill-tape",
     name: "Twill Tape",
     icon: "twill",
+    image: twillTapePhoto,
     description:
       "Premium twill tapes ensuring strength, flexibility, and a perfect finish for garment binding and trims.",
     subcategories: ["Cotton twill tape", "Poly twill tape"],
@@ -181,6 +310,7 @@ export const productCategories: ProductCategory[] = [
     slug: "drawstring",
     name: "Drawstring",
     icon: "drawstring",
+    image: drawstringPhoto,
     description:
       "Woven and braided drawstrings sized and finished to match hoodie, short, and outerwear specs.",
     subcategories: ["Flat drawstring", "Round braided drawstring"],
@@ -189,6 +319,7 @@ export const productCategories: ProductCategory[] = [
     slug: "belt-buckle",
     name: "Belt & Buckle",
     icon: "buckle",
+    image: beltBucklePhoto,
     description:
       "Belts and buckles finished to export standard for workwear, uniforms, and outerwear.",
     subcategories: ["Fabric belt", "Metal buckle", "Plastic buckle"],
@@ -197,6 +328,7 @@ export const productCategories: ProductCategory[] = [
     slug: "tags",
     name: "Hang Tags & Paper Items",
     icon: "tag",
+    image: tagsPhoto,
     description:
       "Premium hang tags, price tags, and fit tags: custom design, quality print, and competitive pricing.",
     subcategories: ["Hang tag", "Price tag", "All kinds of paper item"],
@@ -205,6 +337,7 @@ export const productCategories: ProductCategory[] = [
     slug: "leather-items",
     name: "Leather Items (PU)",
     icon: "patch",
+    image: leatherItemsPhoto,
     description:
       "Manufacturer and supplier of premium PU patches and rubber PU labels for the global RMG trims industry.",
     subcategories: ["PU patch", "Rubber PU label"],
@@ -213,6 +346,7 @@ export const productCategories: ProductCategory[] = [
     slug: "lace",
     name: "Lace",
     icon: "lace",
+    image: lacePhoto,
     description:
       "Decorative and functional lace trims finished for lingerie, kidswear, and fashion apparel.",
     subcategories: ["Cotton lace", "Elastic lace"],
@@ -221,6 +355,7 @@ export const productCategories: ProductCategory[] = [
     slug: "poly",
     name: "Poly",
     icon: "poly",
+    image: polyPhoto,
     description: "Poly bags and poly packaging sized and printed to a buyer's packing list.",
     subcategories: ["Garment poly bag", "Printed poly bag"],
   },
@@ -228,6 +363,7 @@ export const productCategories: ProductCategory[] = [
     slug: "carton",
     name: "Carton",
     icon: "carton",
+    image: cartonPhoto,
     description: "Export-grade cartons built to protect bulk shipments through global freight.",
     subcategories: ["Standard export carton", "Printed carton"],
   },
@@ -259,6 +395,7 @@ export const faqs = [
 export const navLinks = [
   { label: "About", to: "/about" },
   { label: "Products", to: "/products" },
+  { label: "Showcase", to: "/showcase" },
   { label: "Quality", to: "/certifications" },
   { label: "Contact", to: "/contact" },
 ];

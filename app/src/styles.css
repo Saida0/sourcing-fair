@@ -139,3 +139,73 @@
     font-family: var(--font-mono-spec);
   }
 }
+
+/* Ken Burns drift for the About collage (about-summary.tsx). Applied to the
+   inner <img> of an overflow-hidden frame; scale keeps edges covered while
+   the translate pans. Compositor-only properties, alternating so the drift
+   breathes instead of snapping on loop. Gated behind prefers-reduced-motion:
+   the class is only added when motion is allowed, but the media query is a
+   second line of defense. */
+@media (prefers-reduced-motion: no-preference) {
+  .kenburns {
+    animation: kenburns-pan 18s ease-in-out infinite alternate;
+  }
+  .kenburns-reverse {
+    animation: kenburns-pan-reverse 22s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes kenburns-pan {
+  from {
+    transform: scale(1.05) translate(-1.5%, -1%);
+  }
+  to {
+    transform: scale(1.12) translate(1.5%, 1%);
+  }
+}
+
+@keyframes kenburns-pan-reverse {
+  from {
+    transform: scale(1.12) translate(1.5%, -1%);
+  }
+  to {
+    transform: scale(1.05) translate(-1.5%, 1%);
+  }
+}
+
+/* Infinite marquee (certificates strip, buyer wordmark strip). The track
+   holds TWO copies of its content; translating -50% then looping is
+   seamless. Pauses on hover so certificates can be read. Reduced motion:
+   no animation — the row just wraps statically. */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 45s) linear infinite;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+  }
+  .marquee__track > [data-marquee-copy] {
+    display: none;
+  }
+}

@@ -10,16 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ShowcaseRouteImport } from './routes/showcase'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CertificationsRouteImport } from './routes/certifications'
+import { Route as BgPreviewRouteImport } from './routes/bg-preview'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShowcaseRoute = ShowcaseRouteImport.update({
+  id: '/showcase',
+  path: '/showcase',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
@@ -42,6 +49,11 @@ const CertificationsRoute = CertificationsRouteImport.update({
   path: '/certifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BgPreviewRoute = BgPreviewRouteImport.update({
+  id: '/bg-preview',
+  path: '/bg-preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -56,29 +68,35 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/bg-preview': typeof BgPreviewRoute
   '/certifications': typeof CertificationsRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/showcase': typeof ShowcaseRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/bg-preview': typeof BgPreviewRoute
   '/certifications': typeof CertificationsRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/showcase': typeof ShowcaseRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/bg-preview': typeof BgPreviewRoute
   '/certifications': typeof CertificationsRoute
   '/contact': typeof ContactRoute
   '/products': typeof ProductsRoute
   '/robots.txt': typeof RobotsDottxtRoute
+  '/showcase': typeof ShowcaseRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
@@ -86,38 +104,46 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/bg-preview'
     | '/certifications'
     | '/contact'
     | '/products'
     | '/robots.txt'
+    | '/showcase'
     | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/bg-preview'
     | '/certifications'
     | '/contact'
     | '/products'
     | '/robots.txt'
+    | '/showcase'
     | '/sitemap.xml'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/bg-preview'
     | '/certifications'
     | '/contact'
     | '/products'
     | '/robots.txt'
+    | '/showcase'
     | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BgPreviewRoute: typeof BgPreviewRoute
   CertificationsRoute: typeof CertificationsRoute
   ContactRoute: typeof ContactRoute
   ProductsRoute: typeof ProductsRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
+  ShowcaseRoute: typeof ShowcaseRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -128,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/showcase': {
+      id: '/showcase'
+      path: '/showcase'
+      fullPath: '/showcase'
+      preLoaderRoute: typeof ShowcaseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/robots.txt': {
@@ -158,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CertificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bg-preview': {
+      id: '/bg-preview'
+      path: '/bg-preview'
+      fullPath: '/bg-preview'
+      preLoaderRoute: typeof BgPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -178,10 +218,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BgPreviewRoute: BgPreviewRoute,
   CertificationsRoute: CertificationsRoute,
   ContactRoute: ContactRoute,
   ProductsRoute: ProductsRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
+  ShowcaseRoute: ShowcaseRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport

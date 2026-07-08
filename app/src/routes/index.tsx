@@ -10,6 +10,8 @@ import { WhyUs } from "../components/home/why-us";
 import { ProductsGrid } from "../components/home/products-grid";
 import { ProcessRail } from "../components/home/process-rail";
 import { Presence } from "../components/home/presence";
+import { TrustedBy } from "../components/home/trusted-by";
+import { CertificatesMarquee } from "../components/certificates-marquee";
 import { Quality } from "../components/home/quality";
 import { CtaBanner } from "../components/home/cta-banner";
 import { Faq } from "../components/home/faq";
@@ -21,7 +23,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-dvh bg-white">
-      <Nav />
+      <Nav onDark />
       <main>
         <Hero />
         <StatsBand />
@@ -30,7 +32,9 @@ function Index() {
         <ProductsGrid />
         <ProcessRail />
         <Presence />
+        <TrustedBy />
         <Quality />
+        <CertificatesMarquee />
         <CtaBanner />
         <Faq />
       </main>

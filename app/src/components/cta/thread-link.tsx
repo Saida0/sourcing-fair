@@ -5,16 +5,29 @@ import { Link } from "@tanstack/react-router";
  * hover/focus (pure CSS stroke-dashoffset transition) — ties to the trims
  * material world instead of a generic underline.
  */
-export function ThreadLink({ to, children }: { to: string; children: string }) {
+export function ThreadLink({
+  to,
+  children,
+  dark = false,
+}: {
+  to: string;
+  children: string;
+  /** Use on dark backgrounds (e.g. the animated hero) instead of the default light-page colors. */
+  dark?: boolean;
+}) {
   return (
     <Link to={to} className="group inline-flex flex-col items-start gap-1.5">
-      <span className="font-display text-sm font-semibold text-sf-ink">{children}</span>
+      <span
+        className={`font-display text-sm font-semibold ${dark ? "text-white" : "text-sf-ink"}`}
+      >
+        {children}
+      </span>
       <svg
         width="120"
         height="10"
         viewBox="0 0 120 10"
         fill="none"
-        className="text-sf-navy"
+        className={dark ? "text-white/70" : "text-sf-navy"}
         aria-hidden
       >
         <path

@@ -1,0 +1,161 @@
+/* Animated background + card chrome for the "Why Sourcing Fair" section
+   (why-us.tsx) — light theme. All motion is compositor-only
+   (transform/opacity keyframes) and disabled under prefers-reduced-motion. */
+
+/* --- Aurora: two soft brand-colored glow fields drifting slowly. --- */
+.whyus-aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.whyus-aurora--navy {
+  width: 55rem;
+  height: 55rem;
+  left: -18rem;
+  top: -22rem;
+  background: radial-gradient(circle, rgba(30, 70, 134, 0.14) 0%, transparent 65%);
+}
+
+.whyus-aurora--brass {
+  width: 42rem;
+  height: 42rem;
+  right: -14rem;
+  bottom: -18rem;
+  background: radial-gradient(circle, rgba(185, 138, 46, 0.13) 0%, transparent 65%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .whyus-aurora--navy {
+    animation: whyus-drift-a 26s ease-in-out infinite alternate;
+  }
+  .whyus-aurora--brass {
+    animation: whyus-drift-b 32s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes whyus-drift-a {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(10rem, 6rem) scale(1.15);
+  }
+}
+
+@keyframes whyus-drift-b {
+  from {
+    transform: translate(0, 0) scale(1.1);
+  }
+  to {
+    transform: translate(-8rem, -5rem) scale(0.95);
+  }
+}
+
+/* --- Floating trims: faint line-art icons of the company's own products
+   bobbing at different speeds, like trims scattered on a cutting table. --- */
+.whyus-float {
+  position: absolute;
+  color: rgba(30, 70, 134, 0.1);
+  pointer-events: none;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .whyus-float {
+    animation: whyus-bob var(--bob-duration, 14s) ease-in-out infinite alternate;
+    animation-delay: var(--bob-delay, 0s);
+  }
+}
+
+@keyframes whyus-bob {
+  from {
+    transform: translateY(-14px) rotate(var(--bob-tilt, -6deg));
+  }
+  to {
+    transform: translateY(14px) rotate(calc(var(--bob-tilt, -6deg) * -1));
+  }
+}
+
+/* --- Stitch rule: a dashed thread line that "sews" across the section
+   under the heading, drawing itself via dash-offset. --- */
+.whyus-stitch {
+  stroke-dasharray: 10 8;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .whyus-stitch {
+    animation: whyus-sew 2.4s ease-out both;
+  }
+}
+
+@keyframes whyus-sew {
+  from {
+    stroke-dashoffset: 900;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* --- Cards. Hover: lift + brass edge + soft shadow. --- */
+.whyus-card {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 14px;
+  padding: 1.5rem;
+  background: #ffffff;
+  border: 1px solid var(--color-sf-line);
+  overflow: hidden;
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.whyus-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(185, 138, 46, 0.5);
+  box-shadow: 0 24px 48px -28px rgba(16, 20, 35, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whyus-card,
+  .whyus-card:hover {
+    transform: none;
+  }
+}
+
+/* Corner sheen that fades in on hover — light catching a metal trim. */
+.whyus-card::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  right: -60%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle at center, rgba(185, 138, 46, 0.12) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.whyus-card:hover::after {
+  opacity: 1;
+}
+
+/* Featured (first) card: the one dark surface in the band — brand navy
+   gradient with white text, so the grid keeps a clear anchor. */
+.whyus-card--featured {
+  background: linear-gradient(135deg, var(--color-sf-navy) 0%, var(--color-sf-navy-deep) 100%);
+  border-color: var(--color-sf-navy);
+}
+
+.whyus-card--featured:hover {
+  border-color: rgba(217, 173, 85, 0.6);
+}

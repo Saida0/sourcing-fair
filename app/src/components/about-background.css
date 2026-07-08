@@ -1,0 +1,37 @@
+/*
+ * Styles for <AboutBackground> (about-background.tsx). Imported only by
+ * that component. The only animated property is `transform` (a slow scale),
+ * so it stays on the compositor thread — no layout/paint cost per frame.
+ */
+
+.about-bg {
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  animation: about-bg-drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes about-bg-drift {
+  0%   { transform: scale(1) translate3d(0, 0, 0); }
+  100% { transform: scale(1.08) translate3d(-1%, -1%, 0); }
+}
+
+/* Scrim: stronger wash than the old abstract-art version — the factory
+   photo behind it is busier. Center-weighted (the About heading/body are
+   centered), lifting hardest where the text sits while the photo still
+   reads at the edges. */
+.about-bg__scrim {
+  background: radial-gradient(
+    ellipse 75% 70% at 50% 45%,
+    rgba(246, 247, 251, 0.94) 0%,
+    rgba(246, 247, 251, 0.85) 55%,
+    rgba(246, 247, 251, 0.55) 80%,
+    rgba(246, 247, 251, 0.3) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-bg {
+    animation: none !important;
+  }
+}

@@ -1,12 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Target, Compass } from "lucide-react";
+import { Target, Compass, Download } from "lucide-react";
 
 import { Nav } from "../components/nav";
 import { Footer } from "../components/footer";
 import { WhatsappButton } from "../components/whatsapp-button";
 import { Reveal } from "../components/reveal";
-import { PhotoPlaceholder } from "../components/photo-placeholder";
-import { values, presenceCountries } from "../lib/content";
+import { AboutBackground } from "../components/about-background";
+import labelsPhoto from "../assets/products/labels.jpg";
+import buttonsPhoto from "../assets/products/buttons.jpg";
+import twillTapePhoto from "../assets/products/twill-tape.jpg";
+import lacePhoto from "../assets/products/lace.jpg";
+import { values, presenceCountries, leadership } from "../lib/content";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -44,33 +48,51 @@ const milestones = [
 
 function About() {
   return (
-    <div className="min-h-dvh bg-white">
+    <div className="min-h-dvh bg-sf-paper">
       <Nav />
       <main className="pt-32">
-        <section className="mx-auto max-w-[900px] px-6 text-center">
-          <Reveal>
-            <span className="font-spec text-xs uppercase tracking-[0.18em] text-sf-brass">
-              About us
-            </span>
-            <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-sf-ink md:text-5xl">
-              A trusted RMG trims partner, built over 10+ years
-            </h1>
-            <p className="mx-auto mt-6 max-w-[62ch] text-base leading-relaxed text-sf-ink/65">
-              Sourcing Fair is a Bangladesh-based RMG trims and accessories manufacturer
-              and supplier with a strong international presence in China. We specialize
-              in delivering high-quality garment accessories that meet global fashion
-              and apparel industry standards, with premium quality, competitive
-              pricing, and on-time delivery for garment manufacturers, exporters, and
-              fashion brands worldwide.
-            </p>
-          </Reveal>
+        <section className="relative overflow-hidden py-20 sm:py-28">
+          <AboutBackground />
+          <div className="relative z-10 mx-auto max-w-[900px] px-6 text-center">
+            <Reveal>
+              <span className="font-spec text-xs uppercase tracking-[0.18em] text-sf-brass">
+                About us
+              </span>
+              <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-sf-ink md:text-5xl">
+                A trusted RMG trims partner, built over 10+ years
+              </h1>
+              <p className="mx-auto mt-6 max-w-[62ch] text-base leading-relaxed text-sf-ink/65">
+                Sourcing Fair is a Bangladesh-based RMG trims and accessories manufacturer
+                and supplier with a strong international presence in China. We specialize
+                in delivering high-quality garment accessories that meet global fashion
+                and apparel industry standards, with premium quality, competitive
+                pricing, and on-time delivery for garment manufacturers, exporters, and
+                fashion brands worldwide.
+              </p>
+              <a
+                href="/Sourcing-Fair-Company-Profile.pdf"
+                download
+                className="mt-7 inline-flex items-center gap-2 rounded-full border border-sf-navy/25 px-6 py-3 font-display text-sm font-semibold text-sf-navy transition-colors hover:bg-sf-navy hover:text-white"
+              >
+                <Download size={16} /> Download Company Profile (PDF)
+              </a>
+            </Reveal>
+          </div>
         </section>
 
         <section className="mx-auto mt-16 grid max-w-[1240px] grid-cols-2 gap-4 px-6 md:grid-cols-4">
-          <PhotoPlaceholder label="Office photo pending" className="col-span-2 aspect-video md:col-span-1" />
-          <PhotoPlaceholder label="Team photo pending" className="aspect-video" />
-          <PhotoPlaceholder label="Product photo pending" className="aspect-video" />
-          <PhotoPlaceholder label="Sample room photo pending" className="aspect-video" />
+          <div className="col-span-2 aspect-video overflow-hidden rounded-[14px] bg-sf-paper md:col-span-1">
+            <img src={buttonsPhoto} alt="Assorted garment buttons" className="h-full w-full object-cover" />
+          </div>
+          <div className="aspect-video overflow-hidden rounded-[14px] bg-sf-paper">
+            <img src={twillTapePhoto} alt="Rolls of cotton twill tape" className="h-full w-full object-cover" />
+          </div>
+          <div className="aspect-video overflow-hidden rounded-[14px] bg-sf-paper">
+            <img src={labelsPhoto} alt="Woven labels product sample" className="h-full w-full object-cover" />
+          </div>
+          <div className="aspect-video overflow-hidden rounded-[14px] bg-sf-paper">
+            <img src={lacePhoto} alt="Cotton lace trims" className="h-full w-full object-cover" />
+          </div>
         </section>
 
         <section className="mx-auto max-w-[1240px] px-6 py-24">
@@ -99,6 +121,39 @@ function About() {
                 </ul>
               </div>
             </Reveal>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-[1240px] px-6 pb-24">
+          <Reveal>
+            <h2 className="max-w-lg font-display text-3xl font-semibold tracking-tight text-sf-ink md:text-4xl">
+              Leadership
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
+            {leadership.map((person, i) => (
+              <Reveal key={person.name} delay={i * 0.08}>
+                <div className="h-full rounded-[14px] border border-sf-line bg-white p-8">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-sf-navy font-display text-sm font-bold text-white">
+                    {person.name
+                      .split(" ")
+                      .map((part) => part[0])
+                      .slice(0, 2)
+                      .join("")}
+                  </span>
+                  <h3 className="mt-5 font-display text-lg font-semibold text-sf-ink">
+                    {person.name}
+                  </h3>
+                  <p className="mt-1 font-spec text-xs uppercase tracking-wide text-sf-brass">
+                    {person.title}
+                  </p>
+                  <p className="mt-1 text-xs text-sf-ink/45">{person.credential}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-sf-ink/65">
+                    &ldquo;{person.quote}&rdquo;
+                  </p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </section>
 

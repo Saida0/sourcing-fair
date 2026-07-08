@@ -209,6 +209,15 @@ function Contact() {
                 </div>
               </div>
 
+              <div className="rounded-[14px] border border-sf-line bg-white p-7">
+                <h2 className="font-display text-lg font-semibold text-sf-ink">China office</h2>
+                <div className="mt-4 flex flex-col gap-3 text-sm text-sf-ink/65">
+                  <span className="flex items-start gap-3">
+                    <MapPin size={16} className="mt-0.5 shrink-0 text-sf-brass" /> {company.chinaOffice}
+                  </span>
+                </div>
+              </div>
+
               <div className="overflow-hidden rounded-[14px] border border-sf-line">
                 <iframe
                   title="Sourcing Fair office location"
